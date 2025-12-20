@@ -4,32 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <!-- ✅ Page title/description (used by browsers + previews) -->
   <title>Arab Men Hub - منصة الرجال العرب</title>
   <meta name="description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
 
-  <!-- ✅ Open Graph / Social preview (FIXES the shared preview look) -->
-  <!-- IMPORTANT:
-     1) Upload these files to your repo root (same folder as index.html):
-        - share.png  (recommended 1200x630)
-        - logo.png
-        - favicon.png (optional)
-     2) Replace AMH_BASE_URL below (must match your real GitHub Pages URL)
-  -->
+  <!-- ✅ Share preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Arab Men Hub" />
   <meta property="og:title" content="Arab Men Hub - منصة الرجال العرب" />
   <meta property="og:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta property="og:url" content="https://arabmenhub.github.io/AMH/" />
   <meta property="og:image" content="https://arabmenhub.github.io/AMH/share.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://arabmenhub.github.io/AMH/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arab Men Hub - منصة الرجال العرب" />
   <meta name="twitter:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
   <meta name="twitter:image" content="https://arabmenhub.github.io/AMH/share.png" />
 
-  <link rel="icon" href="favicon.png" />
+  <!-- ✅ Favicons (browser tab logo) -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <!-- Optional SVG favicon (nice on modern browsers) -->
+  <!-- <link rel="icon" type="image/svg+xml" href="favicon.svg"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
   <style>
     :root{
@@ -95,6 +93,7 @@
       gap:12px;
       border-bottom: 1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(8px);
+      z-index: 5;
     }
 
     .brand{
@@ -136,8 +135,9 @@
       text-overflow:ellipsis;
     }
 
-    /* ✅ Language switcher INSIDE header (so it never hides the title on mobile) */
+    /* ✅ Language switcher */
     .langWrap{
+      position:relative; /* IMPORTANT: anchors the dropdown */
       flex: 0 0 auto;
       display:flex;
       align-items:center;
@@ -161,13 +161,15 @@
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 24px rgba(0,0,0,.28);
       min-width: 96px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
+    .langBtn:active{ transform: translateY(1px); }
 
     .langMenu{
       position:absolute;
-      /* place under the button */
       top: calc(100% + 10px);
-      inset-inline-end: 16px;
+      inset-inline-end: 0;
       background: rgba(15,15,22,.96);
       border:1px solid rgba(255,255,255,.14);
       border-radius: 16px;
@@ -175,7 +177,7 @@
       overflow:hidden;
       min-width: 220px;
       display:none;
-      z-index: 50;
+      z-index: 60;
     }
     .langMenu.open{ display:block; }
 
@@ -192,6 +194,7 @@
       cursor:pointer;
       font-weight: 900;
       font-size: 14px;
+      text-align: start;
     }
     .langItem:hover{ background: rgba(255,255,255,.06); }
 
@@ -214,6 +217,7 @@
       padding: 14px 16px 18px;
       display:grid;
       gap: 16px;
+      z-index: 1;
     }
 
     .section{
@@ -247,7 +251,6 @@
       flex: 0 0 auto;
     }
 
-    /* ✅ One grid that works perfectly for mobile/tablet/desktop */
     .grid{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -301,18 +304,8 @@
       z-index:1;
       box-shadow: 0 10px 22px rgba(0,0,0,.22);
     }
-    .icon img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .icon svg{
-      width: 22px;
-      height: 22px;
-      fill: #ffffff;
-      display:block;
-    }
+    .icon img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .icon svg{ width: 22px; height: 22px; fill: #ffffff; display:block; }
 
     .meta{ min-width:0; z-index:1; }
     .nameRow{
@@ -364,11 +357,7 @@
       background: rgba(255,255,255,.05);
       color: rgba(244,244,246,.92);
     }
-    .arrow{
-      font-size: 18px;
-      color: rgba(244,244,246,.70);
-      line-height: 1;
-    }
+    .arrow{ font-size: 18px; color: rgba(244,244,246,.70); line-height: 1; }
 
     /* Notes */
     .note{
@@ -388,7 +377,6 @@
       font-weight: 700;
       font-size: 13px;
       line-height: 1.45;
-      /* ✅ RTL alignment fix */
       text-align: start;
     }
 
@@ -404,18 +392,40 @@
       white-space:nowrap;
     }
 
+    /* ✅ Footer (fixed visuals) */
     .footer{
-      padding: 12px 16px 16px;
+      padding: 14px 16px 16px;
       border-top: 1px solid rgba(255,255,255,.08);
-      color: rgba(185,186,198,.92);
-      font-size: 12px;
       display:grid;
       gap: 10px;
+      position:relative;
+      z-index: 1;
     }
 
-    .footer .small{
-      opacity:.95;
-      line-height: 1.55;
+    .footerCard{
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius: 18px;
+      padding: 12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .footerDot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(229,9,20,.45);
+      margin-top: 5px;
+      flex: 0 0 auto;
+    }
+
+    .footerText{
+      margin:0;
+      color: rgba(185,186,198,.95);
+      font-size: 12.5px;
+      line-height: 1.6;
+      text-align: start;
     }
 
     /* Language blocks */
@@ -424,10 +434,9 @@
 
     /* LTR mode */
     .ltr{ direction:ltr; text-align:left; }
-    .ltr .section h2{ text-transform: uppercase; }
     .ltr .noteText{ text-align:left; }
+    .ltr .footerText{ text-align:left; }
 
-    /* Mobile: slightly tighter header so it never overlaps */
     @media (max-width: 480px){
       body{ padding: 14px 10px 34px; }
       .top{ padding: 14px 12px 12px; }
@@ -435,7 +444,9 @@
       .titles h1{ font-size: 16px; }
       .titles p{ font-size: 12px; }
       .langBtn{ min-width: 84px; padding: 9px 10px; }
+      .langMenu{ min-width: 200px; }
       a.card{ padding: 12px; min-height: 78px; }
+      .footer{ padding: 12px 12px 14px; }
     }
   </style>
 </head>
@@ -444,31 +455,28 @@
   <div class="wrap">
     <div class="shell">
 
-      <!-- Header -->
       <div class="top" id="topBar">
         <div class="brand">
           <div class="logo">
             <img src="logo.png" alt="Logo" />
           </div>
 
-          <!-- AR Titles -->
           <div class="titles" data-lang="ar">
             <h1>Arab Men Hub - منصة الرجال العرب</h1>
             <p>أفضل منصّة روابط ومحتوى عربي مختار</p>
           </div>
 
-          <!-- EN Titles -->
           <div class="titles ltr" data-lang="en">
             <h1>Arab Men Hub</h1>
             <p>The best curated Arabic links hub</p>
           </div>
         </div>
 
-        <!-- Language (inside header so it won't hide title on mobile) -->
         <div class="langWrap">
           <button class="langBtn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
             🌐 <span id="langLabel">AR</span>
           </button>
+
           <div class="langMenu" id="langMenu" role="menu" aria-label="Language">
             <button class="langItem" type="button" data-setlang="en" role="menuitem">
               EN <span class="badge">🇬🇧 English</span>
@@ -482,10 +490,8 @@
 
       <div class="content">
 
-        <!-- ================= AR ================= -->
+        <!-- AR -->
         <div data-lang="ar" id="arBlock">
-
-          <!-- Free -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> القنوات المجانية</h2>
@@ -499,7 +505,6 @@
             <div class="grid" id="arFreeGrid"></div>
           </div>
 
-          <!-- Paid -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> القنوات المدفوعة</h2>
@@ -507,20 +512,16 @@
             <div class="grid" id="arPaidGrid"></div>
           </div>
 
-          <!-- Other platforms -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> منصات أخرى</h2>
             </div>
             <div class="grid" id="arOtherGrid"></div>
           </div>
-
         </div>
 
-        <!-- ================= EN ================= -->
+        <!-- EN -->
         <div data-lang="en" class="ltr" id="enBlock">
-
-          <!-- Free -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> FREE TELEGRAM CHANNELS</h2>
@@ -534,7 +535,6 @@
             <div class="grid" id="enFreeGrid"></div>
           </div>
 
-          <!-- Paid -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> PAID TELEGRAM CHANNELS</h2>
@@ -542,26 +542,30 @@
             <div class="grid" id="enPaidGrid"></div>
           </div>
 
-          <!-- Other platforms -->
           <div class="section">
             <div class="sectionHead">
               <h2><span class="dot"></span> OTHER PLATFORMS</h2>
             </div>
             <div class="grid" id="enOtherGrid"></div>
           </div>
-
         </div>
 
       </div>
 
-      <!-- Footer notes -->
-      
-        <div class="small" data-lang="ar">
-          ملحوظة: التواصل على رسايل الصفحات المجانية أو صفحة إكس (تويتر سابقًا) لطريقة الدفع بـ إنستا باي.
+      <!-- ✅ Footer (fixed + pretty) -->
+      <div class="footer">
+        <div class="footerCard" data-lang="ar">
+          <span class="footerDot" aria-hidden="true"></span>
+          <p class="footerText">
+            ملحوظة: التواصل على رسايل الصفحات المجانية أو صفحة إكس (تويتر سابقًا) لطريقة الدفع بـ إنستا باي.
+          </p>
         </div>
 
-        <div class="small" data-lang="en">
-          Note: Contact via free pages messages or X (formerly Twitter) for InstaPay payment instructions.
+        <div class="footerCard ltr" data-lang="en">
+          <span class="footerDot" aria-hidden="true"></span>
+          <p class="footerText">
+            Note: Contact via free pages messages or X (formerly Twitter) for InstaPay payment instructions.
+          </p>
         </div>
       </div>
 
@@ -570,13 +574,10 @@
 
   <script>
     // =========================
-    // ✅ EASY TO UPDATE LINKS (edit only here)
+    // EASY TO UPDATE LINKS
     // =========================
-
-    // Your GitHub Pages base URL (must match your real link)
     const AMH_BASE_URL = "https://arabmenhub.github.io/AMH/";
 
-    // Telegram links (UPDATED to the ones in your last script)
     const TELEGRAM = {
       free: [
         {
@@ -616,75 +617,51 @@
       ]
     };
 
-    // Other platforms (with simple SVG icons)
-    // NOTE: You asked for “real logos”. These are clean vector marks (SVG),
-    // and they look correct + load instantly without external requests.
     const OTHER = [
       {
-        key: "unlockd",
         href: "https://unlockd.me/egyptian6gay",
         arName: "Unlockd",
         enName: "Unlockd",
         pill: "Unlockd",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/></svg>`
       },
       {
-        key: "x",
         href: "https://x.com/egyptian6gay",
         arName: "إكس (تويتر سابقًا)",
         enName: "X",
         pill: "X",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/></svg>`
       },
       {
-        key: "bluesky",
         href: "https://bsky.app/profile/egygayvid.bsky.social",
         arName: "Bluesky",
         enName: "Bluesky",
         pill: "Bluesky",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 12c-.873-1.695-3.25-4.95-5.01-6.18C5.32 4.57 4.57 4.39 4.18 4.55c-.45.19-.56.87-.56 1.28 0 .41.22 3.37.37 3.86.5 1.63 2.3 2.18 3.95 2.01-2.41.36-4.56 1.25-3.64 4.07.43 1.32 2.04 2.5 3.37 2.77 2.25.45 4.29-1.08 5.38-2.89V12zm0 0c.873-1.695 3.25-4.95 5.01-6.18 1.67-1.25 2.42-1.43 2.81-1.27.45.19.56.87.56 1.28 0 .41-.22 3.37-.37 3.86-.5 1.63-2.3 2.18-3.95 2.01 2.41.36 4.56 1.25 3.64 4.07-.43 1.32-2.04 2.5-3.37 2.77-2.25.45-4.29-1.08-5.38-2.89V12z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-.873-1.695-3.25-4.95-5.01-6.18C5.32 4.57 4.57 4.39 4.18 4.55c-.45.19-.56.87-.56 1.28 0 .41.22 3.37.37 3.86.5 1.63 2.3 2.18 3.95 2.01-2.41.36-4.56 1.25-3.64 4.07.43 1.32 2.04 2.5 3.37 2.77 2.25.45 4.29-1.08 5.38-2.89V12zm0 0c.873-1.695 3.25-4.95 5.01-6.18 1.67-1.25 2.42-1.43 2.81-1.27.45.19.56.87.56 1.28 0 .41-.22 3.37-.37 3.86-.5 1.63-2.3 2.18-3.95 2.01 2.41.36 4.56 1.25 3.64 4.07-.43 1.32-2.04 2.5-3.37 2.77-2.25.45-4.29-1.08-5.38-2.89V12z"/></svg>`
       },
       {
-        key: "tango",
         href: "https://tango.me/arab6gay",
         arName: "Tango",
         enName: "Tango",
         pill: "Tango",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2C6.486 2 2 6.262 2 11.53c0 3.273 1.742 6.17 4.398 7.93L6 22l2.82-1.527c1.002.282 2.064.43 3.18.43 5.514 0 10-4.262 10-9.53C22 6.262 17.514 2 12 2zm-1.2 13.8V7.8l6 4-6 4z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.486 2 2 6.262 2 11.53c0 3.273 1.742 6.17 4.398 7.93L6 22l2.82-1.527c1.002.282 2.064.43 3.18.43 5.514 0 10-4.262 10-9.53C22 6.262 17.514 2 12 2zm-1.2 13.8V7.8l6 4-6 4z"/></svg>`
       },
       {
-        key: "facebook",
         href: "https://www.facebook.com/share/1DTh8zCntV/",
         arName: "Facebook",
         enName: "Facebook",
         pill: "Facebook",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/></svg>`
       },
       {
-        key: "reddit",
         href: "https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu",
         arName: "Reddit",
         enName: "Reddit",
         pill: "Reddit",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/>
-              </svg>`
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/></svg>`
       }
     ];
 
-    // =========================
-    // Render helpers
-    // =========================
     function flagsToText(flags){ return (flags || []).join(" "); }
 
     function makeCard({href, iconHTML, imgSrc, name, flags, pill}){
@@ -714,36 +691,17 @@
       const freeGrid = document.getElementById(`${lang}FreeGrid`);
       const paidGrid = document.getElementById(`${lang}PaidGrid`);
 
-      const freeHTML = TELEGRAM.free.map((c, idx) => {
-        const name = (lang === "ar")
-          ? `${c.arName}`
-          : `${c.enName}`;
-
-        return makeCard({
-          href: c.href,
-          imgSrc: c.logo,
-          name,
-          flags: c.flags,
-          pill: "Telegram"
-        });
+      freeGrid.innerHTML = TELEGRAM.free.map((c) => {
+        const name = (lang === "ar") ? c.arName : c.enName;
+        return makeCard({ href: c.href, imgSrc: c.logo, name, flags: c.flags, pill: "Telegram" });
       }).join("");
 
-      const paidHTML = TELEGRAM.paid.map((c) => {
+      paidGrid.innerHTML = TELEGRAM.paid.map((c) => {
         const name = (lang === "ar")
           ? `${c.prefixAr || ""} ${c.arName}`.trim()
           : `${c.prefixEn || ""} ${c.enName}`.trim();
-
-        return makeCard({
-          href: c.href,
-          imgSrc: c.logo,
-          name,
-          flags: c.flags,
-          pill: "Telegram"
-        });
+        return makeCard({ href: c.href, imgSrc: c.logo, name, flags: c.flags, pill: "Telegram" });
       }).join("");
-
-      freeGrid.innerHTML = freeHTML;
-      paidGrid.innerHTML = paidHTML;
     }
 
     function renderOther(lang){
@@ -756,15 +714,11 @@
       })).join("");
     }
 
-    // =========================
-    // Language logic
-    // =========================
     const langBtn  = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
     const langLabel= document.getElementById("langLabel");
 
     function setMetaForLang(lang){
-      // Update HTML lang/dir for better rendering + SEO + sharing title
       if(lang === "ar"){
         document.documentElement.lang = "ar";
         document.documentElement.dir  = "rtl";
@@ -787,7 +741,6 @@
         document.querySelector('meta[name="twitter:description"]').setAttribute("content", "The best curated Arabic links hub");
       }
 
-      // Always keep correct URL/image (important for share preview)
       document.querySelector('meta[property="og:url"]').setAttribute("content", AMH_BASE_URL);
       document.querySelector('meta[property="og:image"]').setAttribute("content", AMH_BASE_URL + "share.png");
       document.querySelector('meta[name="twitter:image"]').setAttribute("content", AMH_BASE_URL + "share.png");
@@ -826,7 +779,6 @@
     document.addEventListener("click", () => openMenu(false));
     document.addEventListener("keydown", (e) => { if(e.key === "Escape") openMenu(false); });
 
-    // Init language: saved > browser
     const saved = localStorage.getItem("preferred_lang");
     const browserLang = (navigator.language || "en").toLowerCase();
     const browserIsArabic = browserLang.startsWith("ar");
