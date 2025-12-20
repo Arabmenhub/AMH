@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Arab Men Hub - منصة الرجال العرب</title>
   <meta name="description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
 
@@ -35,10 +35,10 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       display:flex;
       justify-content:center;
-      padding: 28px 16px 42px;
+      padding: 22px 14px 40px;
     }
 
-    .wrap{ width:min(980px, 100%); }
+    .wrap{ width:min(1000px, 100%); }
 
     .shell{
       border-radius: var(--radius);
@@ -61,11 +61,11 @@
     /* Header */
     .top{
       position:relative;
-      padding: 22px 22px 18px;
+      padding: 18px 18px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
       border-bottom: 1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(8px);
@@ -74,12 +74,12 @@
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      min-width: 260px;
+      gap:12px;
+      min-width: 220px;
     }
 
     .logo{
-      width:58px;height:58px;
+      width:56px;height:56px;
       border-radius: 16px;
       border: 1px solid rgba(229,9,20,.28);
       background: rgba(229,9,20,.10);
@@ -92,7 +92,7 @@
     .titles{ min-width:0; }
     .titles h1{
       margin:0;
-      font-size: 20px;
+      font-size: 19px;
       letter-spacing:.2px;
       white-space:nowrap;
       overflow:hidden;
@@ -108,7 +108,7 @@
     /* Content */
     .content{
       position:relative;
-      padding: 18px 22px 22px;
+      padding: 16px 18px 20px;
       display:grid;
       gap: 18px;
     }
@@ -116,6 +116,14 @@
     .section{
       display:grid;
       gap: 12px;
+    }
+
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
     .section h2{
@@ -136,34 +144,39 @@
       flex: 0 0 auto;
     }
 
+    /* Responsive grid:
+       - mobile: 1
+       - tablet: 2
+       - wide: 3 (optional) */
     .grid{
       display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 12px;
     }
-
-    @media (max-width: 720px){
-      .grid{ grid-template-columns: 1fr; }
-      .titles h1{ font-size: 18px; }
+    @media (min-width: 720px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1100px){
+      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
-    /* ✅ RTL-safe Card Layout using GRID (no flipping weirdness) */
+    /* Card: flex that wraps nicely on small screens */
     a.card{
       text-decoration:none;
       color: var(--text);
       background: linear-gradient(180deg, var(--card), var(--card2));
       border: 1px solid rgba(255,255,255,.10);
       border-radius: 18px;
-      padding: 14px 14px;
+      padding: 14px;
       position:relative;
       overflow:hidden;
 
-      display:grid;
-      grid-template-columns: 46px 1fr auto;
-      gap: 12px;
+      display:flex;
       align-items:center;
+      gap: 12px;
 
       transition: transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
+      min-width: 0;
     }
 
     a.card::before{
@@ -183,7 +196,7 @@
     }
 
     .icon{
-      width:46px;height:46px;
+      width:52px;height:52px;
       border-radius: 16px;
       border: 1px solid rgba(229,9,20,.22);
       background: rgba(229,9,20,.10);
@@ -191,6 +204,7 @@
       place-items:center;
       overflow:hidden;
       z-index:1;
+      flex: 0 0 auto;
     }
     .icon img{
       width:100%;
@@ -199,13 +213,18 @@
       display:block;
     }
     .icon svg{
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       fill: #ffffff;
       display:block;
     }
 
-    .meta{ min-width:0; z-index:1; }
+    .meta{
+      min-width:0;
+      z-index:1;
+      flex: 1 1 auto;
+    }
+
     .name{
       font-weight: 900;
       font-size: 14px;
@@ -213,6 +232,7 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
+
     .suburl{
       margin-top:6px;
       font-size: 12px;
@@ -229,14 +249,14 @@
       display:flex;
       align-items:center;
       gap:10px;
-      justify-content:flex-start;
+      flex: 0 0 auto;
       white-space:nowrap;
     }
 
     .pill{
       font-size: 11px;
       font-weight: 900;
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
@@ -249,18 +269,32 @@
       line-height: 1;
     }
 
-    /* 🔥 Note badge (free links validity) */
+    /* On very small screens: stack right part under text to avoid overflow */
+    @media (max-width: 420px){
+      a.card{ align-items:flex-start; }
+      .right{
+        margin-top: 10px;
+        width: 100%;
+        justify-content:flex-end;
+      }
+      /* Make it look intentional */
+      a.card{ flex-wrap:wrap; }
+      .meta{ flex: 1 1 100%; }
+    }
+
+    /* Note badge */
     .note{
       display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border-radius: 16px;
       border: 1px solid rgba(229,9,20,.22);
       background: rgba(229,9,20,.08);
       color: rgba(244,244,246,.95);
       font-size: 12px;
-      line-height: 1.45;
+      line-height: 1.55;
     }
     .note strong{ font-weight: 900; }
     .note .chip{
@@ -271,13 +305,14 @@
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       white-space:nowrap;
+      flex: 0 0 auto;
     }
 
-    /* ✅ Language switcher fixed overlay (doesn't affect layout) */
+    /* Language switcher */
     .lang{
       position: fixed;
-      top: 16px;
-      inset-inline-start: 16px;
+      top: 12px;
+      inset-inline-start: 12px;
       z-index: 9999;
     }
 
@@ -344,15 +379,14 @@
     [data-lang]{ display:none; }
     [data-lang].show{ display:block; }
 
-    /* English container uses LTR without flipping the whole page */
     .enWrap{ direction:ltr; text-align:left; }
     .enWrap .suburl{ text-align:left; }
+    .enWrap .section h2{ text-transform: uppercase; }
   </style>
 </head>
 
 <body>
 
-  <!-- Language dropdown -->
   <div class="lang">
     <button class="langBtn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
       🌐 <span id="langLabel">AR</span>
@@ -392,49 +426,39 @@
         <!-- ================= AR ================= -->
         <div data-lang="ar">
           <div class="section">
-            <h2><span class="dot"></span> القنوات المجانية</h2>
+            <div class="sectionHead">
+              <h2><span class="dot"></span> القنوات المجانية</h2>
+            </div>
 
-            <!-- ✅ Free links validity note (AR) -->
             <div class="note">
               <span class="chip">تنبيه</span>
               <span>روابط القنوات المجانية <strong>صالحة لمدة يوم واحد فقط</strong> ويتم تحديثها باستمرار.</span>
             </div>
 
             <div class="grid">
-
-              <!-- ✅ Updated free link #1 -->
               <a class="card" href="https://t.me/+CRIx522PeFw1NDUx" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/free_1.png" alt="Telegram logo"></div>
                 <div class="meta">
                   <div class="name">🇰🇼🇸🇦 قناة مجانية 1</div>
                   <div class="suburl">https://t.me/+CRIx522PeFw1NDUx</div>
                 </div>
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
+                <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
 
-              <!-- ✅ Updated free link #2 -->
               <a class="card" href="https://t.me/+biwL04nm0XszMDA0" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/free_2.png" alt="Telegram logo"></div>
                 <div class="meta">
                   <div class="name">🇰🇼🇸🇦 قناة مجانية 2</div>
                   <div class="suburl">https://t.me/+biwL04nm0XszMDA0</div>
                 </div>
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
+                <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
 
           <div class="section">
             <h2><span class="dot"></span> القنوات المدفوعة</h2>
             <div class="grid">
-
               <a class="card" href="https://t.me/+LugMJpBoQ7VkYjk8" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/paid_eg.png" alt="Telegram logo"></div>
                 <div class="meta">
@@ -452,14 +476,12 @@
                 </div>
                 <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
 
           <div class="section">
             <h2><span class="dot"></span> منصات اخرى</h2>
             <div class="grid">
-
               <a class="card" href="https://unlockd.me/egyptian6gay" target="_blank" rel="noopener noreferrer">
                 <div class="icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/></svg>
@@ -507,7 +529,6 @@
                 <div class="meta"><div class="name">Reddit</div><div class="suburl">https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu</div></div>
                 <div class="right"><span class="pill">Reddit</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
         </div>
@@ -517,47 +538,35 @@
           <div class="section">
             <h2><span class="dot"></span> FREE TELEGRAM CHANNELS</h2>
 
-            <!-- ✅ Free links validity note (EN) -->
             <div class="note" style="direction:ltr; text-align:left;">
               <span class="chip">Note</span>
               <span>Free Telegram links are <strong>valid for 1 day only</strong> and are updated regularly.</span>
             </div>
 
             <div class="grid">
-
-              <!-- ✅ Updated free link #1 -->
               <a class="card" href="https://t.me/+CRIx522PeFw1NDUx" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/free_1.png" alt="Telegram logo"></div>
                 <div class="meta">
                   <div class="name">🇰🇼🇸🇦 Free Channel 1</div>
                   <div class="suburl">https://t.me/+CRIx522PeFw1NDUx</div>
                 </div>
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
+                <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
 
-              <!-- ✅ Updated free link #2 -->
               <a class="card" href="https://t.me/+biwL04nm0XszMDA0" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/free_2.png" alt="Telegram logo"></div>
                 <div class="meta">
                   <div class="name">🇰🇼🇸🇦 Free Channel 2</div>
                   <div class="suburl">https://t.me/+biwL04nm0XszMDA0</div>
                 </div>
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
+                <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
 
           <div class="section">
             <h2><span class="dot"></span> PAID TELEGRAM CHANNELS</h2>
             <div class="grid">
-
               <a class="card" href="https://t.me/+LugMJpBoQ7VkYjk8" target="_blank" rel="noopener noreferrer">
                 <div class="icon"><img src="telegram/paid_eg.png" alt="Telegram logo"></div>
                 <div class="meta"><div class="name">💎 Paid (EG)</div><div class="suburl">https://t.me/+LugMJpBoQ7VkYjk8</div></div>
@@ -569,14 +578,12 @@
                 <div class="meta"><div class="name">💎 Paid (Gulf)</div><div class="suburl">https://t.me/+k3BiI3d-mjJhNjU0</div></div>
                 <div class="right"><span class="pill">Telegram</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
 
           <div class="section">
             <h2><span class="dot"></span> OTHER PLATFORMS</h2>
             <div class="grid">
-
               <a class="card" href="https://unlockd.me/egyptian6gay" target="_blank" rel="noopener noreferrer">
                 <div class="icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/></svg>
@@ -619,12 +626,11 @@
 
               <a class="card" href="https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu" target="_blank" rel="noopener noreferrer">
                 <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.730 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/></svg>
                 </div>
                 <div class="meta"><div class="name">Reddit</div><div class="suburl">https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu</div></div>
                 <div class="right"><span class="pill">Reddit</span><span class="arrow">›</span></div>
               </a>
-
             </div>
           </div>
         </div>
