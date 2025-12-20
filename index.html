@@ -283,30 +283,47 @@
     }
 
     /* Note badge */
-    .note{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(229,9,20,.22);
-      background: rgba(229,9,20,.08);
-      color: rgba(244,244,246,.95);
-      font-size: 12px;
-      line-height: 1.55;
-    }
-    .note strong{ font-weight: 900; }
-    .note .chip{
-      font-size: 11px;
-      font-weight: 900;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      white-space:nowrap;
-      flex: 0 0 auto;
-    }
+   /* ✅ RTL-friendly Note (fix alignment) */
+.note{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+
+  /* بدل space-between */
+  justify-content:flex-start;
+
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(229,9,20,.22);
+  background: rgba(229,9,20,.08);
+  color: rgba(244,244,246,.95);
+  font-size: 12px;
+  line-height: 1.55;
+
+  /* مهم */
+  text-align: right;
+}
+
+.note .chip{
+  font-size: 11px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  white-space:nowrap;
+
+  /* يخلي "تنبيه" ثابتة */
+  flex: 0 0 auto;
+  margin-inline-start: 0;
+}
+
+.note span:last-child{
+  /* النص ياخد باقي المساحة ويتلف */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 
     /* Language switcher */
     .lang{
