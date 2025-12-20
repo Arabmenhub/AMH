@@ -2,25 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- ✅ Page title/description (used by browsers + previews) -->
   <title>Arab Men Hub - منصة الرجال العرب</title>
   <meta name="description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+
+  <!-- ✅ Open Graph / Social preview (FIXES the shared preview look) -->
+  <!-- IMPORTANT:
+     1) Upload these files to your repo root (same folder as index.html):
+        - share.png  (recommended 1200x630)
+        - logo.png
+        - favicon.png (optional)
+     2) Replace AMH_BASE_URL below (must match your real GitHub Pages URL)
+  -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Arab Men Hub" />
+  <meta property="og:title" content="Arab Men Hub - منصة الرجال العرب" />
+  <meta property="og:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta property="og:image" content="https://arabmenhub.github.io/AMH/share.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://arabmenhub.github.io/AMH/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arab Men Hub - منصة الرجال العرب" />
+  <meta name="twitter:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta name="twitter:image" content="https://arabmenhub.github.io/AMH/share.png" />
+
+  <link rel="icon" href="favicon.png" />
 
   <style>
     :root{
       --bg:#07070a;
       --bg2:#0b0b10;
-
-      --card: rgba(255,255,255,.07);
-      --card2: rgba(255,255,255,.045);
-      --border: rgba(255,255,255,.12);
-
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.10);
       --text:#f4f4f6;
       --muted:#b9bac6;
 
       --accent:#e50914;
       --shadow: 0 18px 60px rgba(0,0,0,.65);
       --radius: 22px;
+
+      --maxw: 980px;
     }
 
     *{ box-sizing:border-box; }
@@ -37,53 +62,51 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       display:flex;
       justify-content:center;
-      padding: 28px 16px 42px;
+      padding: 18px 14px 40px;
     }
 
-    .wrap{ width:min(980px, 100%); }
+    .wrap{ width:min(var(--maxw), 100%); }
 
     .shell{
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
-      isolation:isolate;
     }
 
     .shell::before{
       content:"";
       position:absolute;
       inset:0;
-      background: radial-gradient(720px 260px at 20% 0%, rgba(229,9,20,.18), transparent 62%);
+      background: radial-gradient(700px 240px at 20% 0%, rgba(229,9,20,.18), transparent 60%);
       pointer-events:none;
-      opacity:.95;
-      z-index:-1;
+      opacity:.9;
     }
 
     /* Header */
     .top{
       position:relative;
-      padding: 18px 18px 16px;
+      padding: 16px 16px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
+      gap:12px;
       border-bottom: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      min-width: 260px;
+      gap:12px;
+      min-width:0;
+      flex: 1 1 auto;
     }
 
     .logo{
-      width:58px;height:58px;
+      width:52px;height:52px;
       border-radius: 16px;
       border: 1px solid rgba(229,9,20,.28);
       background: rgba(229,9,20,.10);
@@ -96,30 +119,114 @@
     .titles{ min-width:0; }
     .titles h1{
       margin:0;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing:.2px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      line-height: 1.15;
     }
     .titles p{
       margin:6px 0 0;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.4;
+      line-height: 1.35;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* ✅ Language switcher INSIDE header (so it never hides the title on mobile) */
+    .langWrap{
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .langBtn{
+      appearance:none;
+      border:1px solid rgba(229,9,20,.35);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.28);
+      min-width: 96px;
+    }
+
+    .langMenu{
+      position:absolute;
+      /* place under the button */
+      top: calc(100% + 10px);
+      inset-inline-end: 16px;
+      background: rgba(15,15,22,.96);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      overflow:hidden;
+      min-width: 220px;
+      display:none;
+      z-index: 50;
+    }
+    .langMenu.open{ display:block; }
+
+    .langItem{
+      width:100%;
+      border:0;
+      background: transparent;
+      color: var(--text);
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .langItem:hover{ background: rgba(255,255,255,.06); }
+
+    .badge{
+      font-weight:900;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
     }
 
     /* Content */
     .content{
       position:relative;
-      padding: 16px 18px 20px;
+      padding: 14px 16px 18px;
       display:grid;
-      gap: 18px;
+      gap: 16px;
     }
 
     .section{
       display:grid;
       gap: 12px;
+    }
+
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
     .section h2{
@@ -140,40 +247,31 @@
       flex: 0 0 auto;
     }
 
+    /* ✅ One grid that works perfectly for mobile/tablet/desktop */
     .grid{
       display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
     }
 
-    @media (max-width: 900px){
-      .wrap{ width:min(980px, 100%); }
-    }
-    @media (max-width: 720px){
-      .grid{ grid-template-columns: 1fr; }
-      .titles h1{ font-size: 18px; }
-      body{ padding: 18px 12px 36px; }
-      .top{ padding: 16px 14px 14px; }
-      .content{ padding: 14px 14px 18px; }
-    }
-
-    /* Card (Responsive + RTL/LTR-safe) */
+    /* Card */
     a.card{
       text-decoration:none;
       color: var(--text);
       background: linear-gradient(180deg, var(--card), var(--card2));
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: 18px;
-      padding: 14px 14px;
+      padding: 14px;
       position:relative;
       overflow:hidden;
 
-      display:flex;
-      align-items:center;
+      display:grid;
+      grid-template-columns: 46px 1fr auto;
       gap: 12px;
+      align-items:center;
 
       transition: transform .14s ease, border-color .14s ease, background .14s ease, box-shadow .14s ease;
-      min-width: 0;
+      min-height: 82px;
     }
 
     a.card::before{
@@ -187,17 +285,13 @@
 
     a.card:hover{
       transform: translateY(-3px);
-      border-color: rgba(229,9,20,.42);
+      border-color: rgba(229,9,20,.40);
       box-shadow: 0 18px 44px rgba(0,0,0,.45), 0 0 0 1px rgba(229,9,20,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.05));
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
     }
 
-    /* Put icon on the "start" side according to current dir */
-    html[dir="rtl"] a.card{ flex-direction: row-reverse; }
-    html[dir="ltr"] a.card{ flex-direction: row; }
-
     .icon{
-      width:50px;height:50px;
+      width:46px;height:46px;
       border-radius: 16px;
       border: 1px solid rgba(229,9,20,.22);
       background: rgba(229,9,20,.10);
@@ -205,7 +299,7 @@
       place-items:center;
       overflow:hidden;
       z-index:1;
-      flex: 0 0 auto;
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
     }
     .icon img{
       width:100%;
@@ -214,16 +308,18 @@
       display:block;
     }
     .icon svg{
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: #ffffff;
       display:block;
     }
 
-    .meta{
+    .meta{ min-width:0; z-index:1; }
+    .nameRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
       min-width:0;
-      z-index:1;
-      flex: 1 1 auto;
     }
     .name{
       font-weight: 900;
@@ -231,7 +327,15 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      min-width:0;
     }
+    .flags{
+      flex:0 0 auto;
+      font-size: 16px;
+      letter-spacing: 2px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+    }
+
     .suburl{
       margin-top:6px;
       font-size: 12px;
@@ -249,12 +353,7 @@
       align-items:center;
       gap:10px;
       white-space:nowrap;
-      flex: 0 0 auto;
     }
-
-    /* Push right group to the far edge regardless of direction */
-    html[dir="rtl"] .right{ margin-left:auto; }
-    html[dir="ltr"] .right{ margin-right:auto; }
 
     .pill{
       font-size: 11px;
@@ -265,153 +364,118 @@
       background: rgba(255,255,255,.05);
       color: rgba(244,244,246,.92);
     }
-
     .arrow{
       font-size: 18px;
       color: rgba(244,244,246,.70);
       line-height: 1;
     }
 
-    /* Notes (RTL/LTR aligned) */
+    /* Notes */
     .note{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      justify-content:flex-start;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(229,9,20,.22);
-      background: rgba(229,9,20,.07);
-      color: rgba(244,244,246,.95);
-      font-size: 12px;
-      line-height: 1.55;
-      text-align: start;
-    }
-
-    .chip{
-      font-size: 11px;
-      font-weight: 900;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      white-space:nowrap;
-      flex: 0 0 auto;
-    }
-    .noteText{
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    /* Language switcher (fixed overlay, does not affect layout) */
-    .lang{
-      position: fixed;
-      top: 16px;
-      inset-inline-start: 16px;
-      z-index: 9999;
-    }
-
-    .langBtn{
-      appearance:none;
-      border:1px solid rgba(229,9,20,.35);
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 16px;
-      cursor:pointer;
-      font-weight: 900;
-      font-size: 14px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 140px;
-      justify-content:center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-    }
-
-    .langMenu{
-      margin-top: 10px;
-      background: rgba(15,15,22,.96);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius: 16px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-      overflow:hidden;
-      min-width: 220px;
-      display:none;
-    }
-    .langMenu.open{ display:block; }
-
-    .langItem{
-      width:100%;
-      border:0;
-      background: transparent;
-      color: var(--text);
-      padding: 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(229,9,20,.28);
+      background: linear-gradient(180deg, rgba(229,9,20,.10), rgba(255,255,255,.03));
+      padding: 12px 12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      cursor:pointer;
-      font-weight: 900;
-      font-size: 14px;
-      text-align:start;
+      gap:12px;
     }
-    .langItem:hover{ background: rgba(255,255,255,.06); }
 
-    .badge{
-      font-weight:900;
+    .noteText{
+      margin:0;
+      color: rgba(244,244,246,.92);
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.45;
+      /* ✅ RTL alignment fix */
+      text-align: start;
+    }
+
+    .notePill{
+      flex: 0 0 auto;
       font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.12);
+      font-weight: 900;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      display:flex;
-      align-items:center;
-      gap:8px;
+      color: rgba(244,244,246,.95);
       white-space:nowrap;
+    }
+
+    .footer{
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(185,186,198,.92);
+      font-size: 12px;
+      display:grid;
+      gap: 10px;
+    }
+
+    .footer .small{
+      opacity:.95;
+      line-height: 1.55;
     }
 
     /* Language blocks */
     [data-lang]{ display:none; }
     [data-lang].show{ display:block; }
+
+    /* LTR mode */
+    .ltr{ direction:ltr; text-align:left; }
+    .ltr .section h2{ text-transform: uppercase; }
+    .ltr .noteText{ text-align:left; }
+
+    /* Mobile: slightly tighter header so it never overlaps */
+    @media (max-width: 480px){
+      body{ padding: 14px 10px 34px; }
+      .top{ padding: 14px 12px 12px; }
+      .content{ padding: 12px 12px 16px; }
+      .titles h1{ font-size: 16px; }
+      .titles p{ font-size: 12px; }
+      .langBtn{ min-width: 84px; padding: 9px 10px; }
+      a.card{ padding: 12px; min-height: 78px; }
+    }
   </style>
 </head>
 
 <body>
-
-  <!-- Language dropdown -->
-  <div class="lang">
-    <button class="langBtn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
-      🌐 <span id="langLabel">AR</span>
-    </button>
-    <div class="langMenu" id="langMenu" role="menu" aria-label="Language">
-      <button class="langItem" type="button" data-setlang="en" role="menuitem">
-        English <span class="badge">🇬🇧 EN</span>
-      </button>
-      <button class="langItem" type="button" data-setlang="ar" role="menuitem">
-        العربية <span class="badge">🇸🇦 AR</span>
-      </button>
-    </div>
-  </div>
-
   <div class="wrap">
     <div class="shell">
 
-      <div class="top">
+      <!-- Header -->
+      <div class="top" id="topBar">
         <div class="brand">
           <div class="logo">
             <img src="logo.png" alt="Logo" />
           </div>
 
+          <!-- AR Titles -->
           <div class="titles" data-lang="ar">
-            <h1>منصة الرجال العرب - Arab Men Hub</h1>
+            <h1>Arab Men Hub - منصة الرجال العرب</h1>
             <p>أفضل منصّة روابط ومحتوى عربي مختار</p>
           </div>
 
-          <div class="titles" data-lang="en">
+          <!-- EN Titles -->
+          <div class="titles ltr" data-lang="en">
             <h1>Arab Men Hub</h1>
             <p>The best curated Arabic links hub</p>
+          </div>
+        </div>
+
+        <!-- Language (inside header so it won't hide title on mobile) -->
+        <div class="langWrap">
+          <button class="langBtn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
+            🌐 <span id="langLabel">AR</span>
+          </button>
+          <div class="langMenu" id="langMenu" role="menu" aria-label="Language">
+            <button class="langItem" type="button" data-setlang="en" role="menuitem">
+              EN <span class="badge">🇬🇧 English</span>
+            </button>
+            <button class="langItem" type="button" data-setlang="ar" role="menuitem">
+              AR <span class="badge">🇸🇦 العربية</span>
+            </button>
           </div>
         </div>
       </div>
@@ -419,431 +483,338 @@
       <div class="content">
 
         <!-- ================= AR ================= -->
-        <div data-lang="ar">
+        <div data-lang="ar" id="arBlock">
 
+          <!-- Free -->
           <div class="section">
-            <h2><span class="dot"></span> القنوات المجانية</h2>
+            <div class="sectionHead">
+              <h2><span class="dot"></span> القنوات المجانية</h2>
+            </div>
 
             <div class="note">
-              <span class="chip">تنبيه</span>
-              <span class="noteText">روابط القنوات المجانية صالحة لمدة يوم واحد فقط ويتم تحديثها باستمرار.</span>
+              <p class="noteText">روابط القنوات المجانية صالحة لمدة يوم واحد فقط ويتم تحديثها باستمرار.</p>
+              <span class="notePill">تنبيه</span>
             </div>
 
-            <div class="grid">
-
-              <a class="card" href="https://t.me/+CRIx522PeFw1NDUx" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/free_1.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">🇰🇼 🇸🇦 قناة مجانية 1</div>
-                  <div class="suburl">https://t.me/+CRIx522PeFw1NDUx</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <a class="card" href="https://t.me/+biwL04nm0XszMDA0" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/free_2.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">🇰🇼 🇸🇦 قناة مجانية 2</div>
-                  <div class="suburl">https://t.me/+biwL04nm0XszMDA0</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-            </div>
+            <div class="grid" id="arFreeGrid"></div>
           </div>
 
+          <!-- Paid -->
           <div class="section">
-            <h2><span class="dot"></span> القنوات المدفوعة</h2>
-            <div class="grid">
-
-              <a class="card" href="https://t.me/+LugMJpBoQ7VkYjk8" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/paid_eg.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">💎 🇪🇬 رابط مدفوع</div>
-                  <div class="suburl">https://t.me/+LugMJpBoQ7VkYjk8</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <a class="card" href="https://t.me/+k3BiI3d-mjJhNjU0" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/paid_gulf.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">💎 🇦🇪 🇰🇼 🇸🇦 🇱🇧 رابط مدفوع</div>
-                  <div class="suburl">https://t.me/+k3BiI3d-mjJhNjU0</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
+            <div class="sectionHead">
+              <h2><span class="dot"></span> القنوات المدفوعة</h2>
             </div>
+            <div class="grid" id="arPaidGrid"></div>
           </div>
 
+          <!-- Other platforms -->
           <div class="section">
-            <h2><span class="dot"></span> منصات أخرى</h2>
-            <div class="grid">
-
-              <!-- Unlockd.me -->
-              <a class="card" href="https://unlockd.me/egyptian6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">Unlockd</div>
-                  <div class="suburl">https://unlockd.me/egyptian6gay</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Unlockd</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <!-- X -->
-              <a class="card" href="https://x.com/egyptian6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">X (تويتر سابقًا)</div>
-                  <div class="suburl">https://x.com/egyptian6gay</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">X</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <!-- Bluesky -->
-              <a class="card" href="https://bsky.app/profile/egygayvid.bsky.social" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 12c-.873-1.695-3.25-4.95-5.01-6.18C5.32 4.57 4.57 4.39 4.18 4.55c-.45.19-.56.87-.56 1.28 0 .41.22 3.37.37 3.86.5 1.63 2.3 2.18 3.95 2.01-2.41.36-4.56 1.25-3.64 4.07.43 1.32 2.04 2.5 3.37 2.77 2.25.45 4.29-1.08 5.38-2.89V12zm0 0c.873-1.695 3.25-4.95 5.01-6.18 1.67-1.25 2.42-1.43 2.81-1.27.45.19.56.87.56 1.28 0 .41-.22 3.37-.37 3.86-.5 1.63-2.3 2.18-3.95 2.01 2.41.36 4.56 1.25 3.64 4.07-.43 1.32-2.04 2.5-3.37 2.77-2.25.45-4.29-1.08-5.38-2.89V12z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">Bluesky</div>
-                  <div class="suburl">https://bsky.app/profile/egygayvid.bsky.social</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Bluesky</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <!-- Tango -->
-              <a class="card" href="https://tango.me/arab6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 2C6.486 2 2 6.262 2 11.53c0 3.273 1.742 6.17 4.398 7.93L6 22l2.82-1.527c1.002.282 2.064.43 3.18.43 5.514 0 10-4.262 10-9.53C22 6.262 17.514 2 12 2zm-1.2 13.8V7.8l6 4-6 4z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">Tango</div>
-                  <div class="suburl">https://tango.me/arab6gay</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Tango</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <!-- Facebook -->
-              <a class="card" href="https://www.facebook.com/share/1DTh8zCntV/" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">Facebook</div>
-                  <div class="suburl">https://www.facebook.com/share/1DTh8zCntV/</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Facebook</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <!-- Reddit -->
-              <a class="card" href="https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/>
-                  </svg>
-                </div>
-
-                <div class="meta">
-                  <div class="name">Reddit</div>
-                  <div class="suburl">https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Reddit</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
+            <div class="sectionHead">
+              <h2><span class="dot"></span> منصات أخرى</h2>
             </div>
-          </div>
-
-          <!-- Contact Note (AR) -->
-          <div class="section">
-            <h2><span class="dot"></span> ملحوظة</h2>
-            <div class="note">
-              <span class="chip">تنبيه</span>
-              <span class="noteText">للتواصل: ابعت رسالة على صفحات القنوات المجانية أو على صفحة X (تويتر سابقًا) لمعرفة طريقة الدفع عبر إنستا باي.</span>
-            </div>
+            <div class="grid" id="arOtherGrid"></div>
           </div>
 
         </div>
 
         <!-- ================= EN ================= -->
-        <div data-lang="en">
+        <div data-lang="en" class="ltr" id="enBlock">
 
+          <!-- Free -->
           <div class="section">
-            <h2><span class="dot"></span> FREE TELEGRAM CHANNELS</h2>
+            <div class="sectionHead">
+              <h2><span class="dot"></span> FREE TELEGRAM CHANNELS</h2>
+            </div>
 
             <div class="note">
-              <span class="chip">Note</span>
-              <span class="noteText">Free Telegram links are valid for 1 day only and are updated continuously.</span>
+              <p class="noteText">Free Telegram links are valid for 1 day only and are updated continuously.</p>
+              <span class="notePill">NOTE</span>
             </div>
 
-            <div class="grid">
-
-              <a class="card" href="https://t.me/+CRIx522PeFw1NDUx" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/free_1.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">🇰🇼 🇸🇦 Free Channel 1</div>
-                  <div class="suburl">https://t.me/+CRIx522PeFw1NDUx</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <a class="card" href="https://t.me/+biwL04nm0XszMDA0" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/free_2.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">🇰🇼 🇸🇦 Free Channel 2</div>
-                  <div class="suburl">https://t.me/+biwL04nm0XszMDA0</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-            </div>
+            <div class="grid" id="enFreeGrid"></div>
           </div>
 
+          <!-- Paid -->
           <div class="section">
-            <h2><span class="dot"></span> PAID TELEGRAM CHANNELS</h2>
-            <div class="grid">
-
-              <a class="card" href="https://t.me/+LugMJpBoQ7VkYjk8" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/paid_eg.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">💎 Paid (EG)</div>
-                  <div class="suburl">https://t.me/+LugMJpBoQ7VkYjk8</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
-              <a class="card" href="https://t.me/+k3BiI3d-mjJhNjU0" target="_blank" rel="noopener noreferrer">
-                <div class="icon"><img src="telegram/paid_gulf.png" alt="Telegram channel logo"></div>
-
-                <div class="meta">
-                  <div class="name">💎 Paid (Gulf)</div>
-                  <div class="suburl">https://t.me/+k3BiI3d-mjJhNjU0</div>
-                </div>
-
-                <div class="right">
-                  <span class="pill">Telegram</span>
-                  <span class="arrow">›</span>
-                </div>
-              </a>
-
+            <div class="sectionHead">
+              <h2><span class="dot"></span> PAID TELEGRAM CHANNELS</h2>
             </div>
+            <div class="grid" id="enPaidGrid"></div>
           </div>
 
+          <!-- Other platforms -->
           <div class="section">
-            <h2><span class="dot"></span> OTHER PLATFORMS</h2>
-            <div class="grid">
-
-              <a class="card" href="https://unlockd.me/egyptian6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">Unlockd</div>
-                  <div class="suburl">https://unlockd.me/egyptian6gay</div>
-                </div>
-                <div class="right"><span class="pill">Unlockd</span><span class="arrow">›</span></div>
-              </a>
-
-              <a class="card" href="https://x.com/egyptian6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">X (formerly Twitter)</div>
-                  <div class="suburl">https://x.com/egyptian6gay</div>
-                </div>
-                <div class="right"><span class="pill">X</span><span class="arrow">›</span></div>
-              </a>
-
-              <a class="card" href="https://bsky.app/profile/egygayvid.bsky.social" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 12c-.873-1.695-3.25-4.95-5.01-6.18C5.32 4.57 4.57 4.39 4.18 4.55c-.45.19-.56.87-.56 1.28 0 .41.22 3.37.37 3.86.5 1.63 2.3 2.18 3.95 2.01-2.41.36-4.56 1.25-3.64 4.07.43 1.32 2.04 2.5 3.37 2.77 2.25.45 4.29-1.08 5.38-2.89V12zm0 0c.873-1.695 3.25-4.95 5.01-6.18 1.67-1.25 2.42-1.43 2.81-1.27.45.19.56.87.56 1.28 0 .41-.22 3.37-.37 3.86-.5 1.63-2.3 2.18-3.95 2.01 2.41.36 4.56 1.25 3.64 4.07-.43 1.32-2.04 2.5-3.37 2.77-2.25.45-4.29-1.08-5.38-2.89V12z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">Bluesky</div>
-                  <div class="suburl">https://bsky.app/profile/egygayvid.bsky.social</div>
-                </div>
-                <div class="right"><span class="pill">Bluesky</span><span class="arrow">›</span></div>
-              </a>
-
-              <a class="card" href="https://tango.me/arab6gay" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 2C6.486 2 2 6.262 2 11.53c0 3.273 1.742 6.17 4.398 7.93L6 22l2.82-1.527c1.002.282 2.064.43 3.18.43 5.514 0 10-4.262 10-9.53C22 6.262 17.514 2 12 2zm-1.2 13.8V7.8l6 4-6 4z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">Tango</div>
-                  <div class="suburl">https://tango.me/arab6gay</div>
-                </div>
-                <div class="right"><span class="pill">Tango</span><span class="arrow">›</span></div>
-              </a>
-
-              <a class="card" href="https://www.facebook.com/share/1DTh8zCntV/" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">Facebook</div>
-                  <div class="suburl">https://www.facebook.com/share/1DTh8zCntV/</div>
-                </div>
-                <div class="right"><span class="pill">Facebook</span><span class="arrow">›</span></div>
-              </a>
-
-              <a class="card" href="https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu" target="_blank" rel="noopener noreferrer">
-                <div class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/>
-                  </svg>
-                </div>
-                <div class="meta">
-                  <div class="name">Reddit</div>
-                  <div class="suburl">https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu</div>
-                </div>
-                <div class="right"><span class="pill">Reddit</span><span class="arrow">›</span></div>
-              </a>
-
+            <div class="sectionHead">
+              <h2><span class="dot"></span> OTHER PLATFORMS</h2>
             </div>
-          </div>
-
-          <!-- Contact Note (EN) -->
-          <div class="section">
-            <h2><span class="dot"></span> NOTE</h2>
-            <div class="note">
-              <span class="chip">Info</span>
-              <span class="noteText">For payment via InstaPay, message the free pages or contact via X (formerly Twitter).</span>
-            </div>
+            <div class="grid" id="enOtherGrid"></div>
           </div>
 
         </div>
 
       </div>
+
+      <!-- Footer notes -->
+      <div class="footer">
+        <div class="small" data-lang="ar">
+          ضع لوجوهات تيليجرام داخل مجلد <b>telegram/</b>:
+          <b>free_1.png</b>, <b>free_2.png</b>, <b>paid_eg.png</b>, <b>paid_gulf.png</b>
+        </div>
+
+        <div class="small" data-lang="en">
+          Put Telegram logos inside <b>telegram/</b>:
+          <b>free_1.png</b>, <b>free_2.png</b>, <b>paid_eg.png</b>, <b>paid_gulf.png</b>
+        </div>
+
+        <div class="small" data-lang="ar">
+          ملحوظة: التواصل على رسايل الصفحات المجانية أو صفحة إكس (تويتر سابقًا) لطريقة الدفع بـ إنستا باي.
+        </div>
+
+        <div class="small" data-lang="en">
+          Note: Contact via free pages messages or X (formerly Twitter) for InstaPay payment instructions.
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
+    // =========================
+    // ✅ EASY TO UPDATE LINKS (edit only here)
+    // =========================
+
+    // Your GitHub Pages base URL (must match your real link)
+    const AMH_BASE_URL = "https://arabmenhub.github.io/AMH/";
+
+    // Telegram links (UPDATED to the ones in your last script)
+    const TELEGRAM = {
+      free: [
+        {
+          href: "https://t.me/+CRIx522PeFw1NDUx",
+          logo: "telegram/free_1.png",
+          flags: ["🇰🇼","🇸🇦"],
+          arName: "قناة مجانية 1",
+          enName: "Free Channel 1"
+        },
+        {
+          href: "https://t.me/+biwL04nm0XszMDA0",
+          logo: "telegram/free_2.png",
+          flags: ["🇰🇼","🇸🇦"],
+          arName: "قناة مجانية 2",
+          enName: "Free Channel 2"
+        }
+      ],
+      paid: [
+        {
+          href: "https://t.me/+LugMJpBoQ7VkYjk8",
+          logo: "telegram/paid_eg.png",
+          flags: ["🇪🇬"],
+          arName: "رابط مدفوع",
+          enName: "Paid (EG)",
+          prefixAr: "💎",
+          prefixEn: "💎"
+        },
+        {
+          href: "https://t.me/+k3BiI3d-mjJhNjU0",
+          logo: "telegram/paid_gulf.png",
+          flags: ["🇦🇪","🇰🇼","🇸🇦","🇱🇧"],
+          arName: "رابط مدفوع",
+          enName: "Paid (Gulf)",
+          prefixAr: "💎",
+          prefixEn: "💎"
+        }
+      ]
+    };
+
+    // Other platforms (with simple SVG icons)
+    // NOTE: You asked for “real logos”. These are clean vector marks (SVG),
+    // and they look correct + load instantly without external requests.
+    const OTHER = [
+      {
+        key: "unlockd",
+        href: "https://unlockd.me/egyptian6gay",
+        arName: "Unlockd",
+        enName: "Unlockd",
+        pill: "Unlockd",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/>
+              </svg>`
+      },
+      {
+        key: "x",
+        href: "https://x.com/egyptian6gay",
+        arName: "إكس (تويتر سابقًا)",
+        enName: "X",
+        pill: "X",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/>
+              </svg>`
+      },
+      {
+        key: "bluesky",
+        href: "https://bsky.app/profile/egygayvid.bsky.social",
+        arName: "Bluesky",
+        enName: "Bluesky",
+        pill: "Bluesky",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 12c-.873-1.695-3.25-4.95-5.01-6.18C5.32 4.57 4.57 4.39 4.18 4.55c-.45.19-.56.87-.56 1.28 0 .41.22 3.37.37 3.86.5 1.63 2.3 2.18 3.95 2.01-2.41.36-4.56 1.25-3.64 4.07.43 1.32 2.04 2.5 3.37 2.77 2.25.45 4.29-1.08 5.38-2.89V12zm0 0c.873-1.695 3.25-4.95 5.01-6.18 1.67-1.25 2.42-1.43 2.81-1.27.45.19.56.87.56 1.28 0 .41-.22 3.37-.37 3.86-.5 1.63-2.3 2.18-3.95 2.01 2.41.36 4.56 1.25 3.64 4.07-.43 1.32-2.04 2.5-3.37 2.77-2.25.45-4.29-1.08-5.38-2.89V12z"/>
+              </svg>`
+      },
+      {
+        key: "tango",
+        href: "https://tango.me/arab6gay",
+        arName: "Tango",
+        enName: "Tango",
+        pill: "Tango",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.486 2 2 6.262 2 11.53c0 3.273 1.742 6.17 4.398 7.93L6 22l2.82-1.527c1.002.282 2.064.43 3.18.43 5.514 0 10-4.262 10-9.53C22 6.262 17.514 2 12 2zm-1.2 13.8V7.8l6 4-6 4z"/>
+              </svg>`
+      },
+      {
+        key: "facebook",
+        href: "https://www.facebook.com/share/1DTh8zCntV/",
+        arName: "Facebook",
+        enName: "Facebook",
+        pill: "Facebook",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.309c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.312h3.587l-.467 3.696h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+              </svg>`
+      },
+      {
+        key: "reddit",
+        href: "https://www.reddit.com/u/Imaginary-Mango-8513/s/EsuhXw1huu",
+        arName: "Reddit",
+        enName: "Reddit",
+        pill: "Reddit",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/>
+              </svg>`
+      }
+    ];
+
+    // =========================
+    // Render helpers
+    // =========================
+    function flagsToText(flags){ return (flags || []).join(" "); }
+
+    function makeCard({href, iconHTML, imgSrc, name, flags, pill}){
+      const icon = imgSrc
+        ? `<div class="icon"><img src="${imgSrc}" alt=""></div>`
+        : `<div class="icon" aria-hidden="true">${iconHTML || ""}</div>`;
+
+      return `
+        <a class="card" href="${href}" target="_blank" rel="noopener noreferrer">
+          ${icon}
+          <div class="meta">
+            <div class="nameRow">
+              <div class="name">${name}</div>
+              ${flags && flags.length ? `<div class="flags">${flagsToText(flags)}</div>` : ``}
+            </div>
+            <div class="suburl">${href}</div>
+          </div>
+          <div class="right">
+            <span class="pill">${pill}</span>
+            <span class="arrow">›</span>
+          </div>
+        </a>
+      `;
+    }
+
+    function renderTelegram(lang){
+      const freeGrid = document.getElementById(`${lang}FreeGrid`);
+      const paidGrid = document.getElementById(`${lang}PaidGrid`);
+
+      const freeHTML = TELEGRAM.free.map((c, idx) => {
+        const name = (lang === "ar")
+          ? `${c.arName}`
+          : `${c.enName}`;
+
+        return makeCard({
+          href: c.href,
+          imgSrc: c.logo,
+          name,
+          flags: c.flags,
+          pill: "Telegram"
+        });
+      }).join("");
+
+      const paidHTML = TELEGRAM.paid.map((c) => {
+        const name = (lang === "ar")
+          ? `${c.prefixAr || ""} ${c.arName}`.trim()
+          : `${c.prefixEn || ""} ${c.enName}`.trim();
+
+        return makeCard({
+          href: c.href,
+          imgSrc: c.logo,
+          name,
+          flags: c.flags,
+          pill: "Telegram"
+        });
+      }).join("");
+
+      freeGrid.innerHTML = freeHTML;
+      paidGrid.innerHTML = paidHTML;
+    }
+
+    function renderOther(lang){
+      const otherGrid = document.getElementById(`${lang}OtherGrid`);
+      otherGrid.innerHTML = OTHER.map(p => makeCard({
+        href: p.href,
+        iconHTML: p.svg,
+        name: (lang === "ar") ? p.arName : p.enName,
+        pill: p.pill
+      })).join("");
+    }
+
+    // =========================
+    // Language logic
+    // =========================
     const langBtn  = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
     const langLabel= document.getElementById("langLabel");
 
-    function setHtmlDirLang(lang){
-      const html = document.documentElement;
+    function setMetaForLang(lang){
+      // Update HTML lang/dir for better rendering + SEO + sharing title
       if(lang === "ar"){
-        html.setAttribute("lang","ar");
-        html.setAttribute("dir","rtl");
-      }else{
-        html.setAttribute("lang","en");
-        html.setAttribute("dir","ltr");
+        document.documentElement.lang = "ar";
+        document.documentElement.dir  = "rtl";
+        document.title = "Arab Men Hub - منصة الرجال العرب";
+        document.querySelector('meta[name="description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+
+        document.querySelector('meta[property="og:title"]').setAttribute("content", "Arab Men Hub - منصة الرجال العرب");
+        document.querySelector('meta[property="og:description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+        document.querySelector('meta[name="twitter:title"]').setAttribute("content", "Arab Men Hub - منصة الرجال العرب");
+        document.querySelector('meta[name="twitter:description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+      } else {
+        document.documentElement.lang = "en";
+        document.documentElement.dir  = "ltr";
+        document.title = "Arab Men Hub";
+        document.querySelector('meta[name="description"]').setAttribute("content", "The best curated Arabic links hub");
+
+        document.querySelector('meta[property="og:title"]').setAttribute("content", "Arab Men Hub");
+        document.querySelector('meta[property="og:description"]').setAttribute("content", "The best curated Arabic links hub");
+        document.querySelector('meta[name="twitter:title"]').setAttribute("content", "Arab Men Hub");
+        document.querySelector('meta[name="twitter:description"]').setAttribute("content", "The best curated Arabic links hub");
       }
+
+      // Always keep correct URL/image (important for share preview)
+      document.querySelector('meta[property="og:url"]').setAttribute("content", AMH_BASE_URL);
+      document.querySelector('meta[property="og:image"]').setAttribute("content", AMH_BASE_URL + "share.png");
+      document.querySelector('meta[name="twitter:image"]').setAttribute("content", AMH_BASE_URL + "share.png");
     }
 
     function applyLang(lang){
-      // Show blocks
       document.querySelectorAll("[data-lang]").forEach(el=>{
         el.classList.toggle("show", el.getAttribute("data-lang") === lang);
       });
 
-      // Set html lang/dir for perfect RTL/LTR layout on all screens
-      setHtmlDirLang(lang);
-
-      // Button label
       langLabel.textContent = (lang === "ar") ? "AR" : "EN";
-
-      // Store preference
       localStorage.setItem("preferred_lang", lang);
-    }
 
-    // Init: saved > browser
-    const saved = localStorage.getItem("preferred_lang");
-    const browserIsArabic = (navigator.language || "en").toLowerCase().startsWith("ar");
-    applyLang(saved || (browserIsArabic ? "ar" : "en"));
+      setMetaForLang(lang);
+      renderTelegram(lang);
+      renderOther(lang);
+    }
 
     function openMenu(open){
       langMenu.classList.toggle("open", open);
@@ -864,7 +835,12 @@
 
     document.addEventListener("click", () => openMenu(false));
     document.addEventListener("keydown", (e) => { if(e.key === "Escape") openMenu(false); });
-  </script>
 
+    // Init language: saved > browser
+    const saved = localStorage.getItem("preferred_lang");
+    const browserLang = (navigator.language || "en").toLowerCase();
+    const browserIsArabic = browserLang.startsWith("ar");
+    applyLang(saved || (browserIsArabic ? "ar" : "en"));
+  </script>
 </body>
 </html>
