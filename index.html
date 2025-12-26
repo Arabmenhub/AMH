@@ -53,14 +53,25 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", "Noto Kufi Arabic";
       color: var(--text);
-      background:
-        radial-gradient(900px 520px at 18% -10%, rgba(229,9,20,.22), transparent 55%),
-        radial-gradient(900px 520px at 85% 0%, rgba(255,42,53,.14), transparent 60%),
-        radial-gradient(900px 520px at 50% 110%, rgba(120,92,246,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background: linear-gradient(180deg, #08080c 0%, #0b0b10 45%, #050508 100%);
       display:flex;
       justify-content:center;
       padding: 18px 14px 40px;
+      position:relative;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(1200px 780px at 20% -10%, rgba(229,9,20,.18), transparent 70%),
+        radial-gradient(1000px 640px at 80% 5%, rgba(255,42,53,.12), transparent 65%),
+        radial-gradient(1400px 760px at 50% 110%, rgba(120,92,246,.08), transparent 70%);
+      pointer-events:none;
+      z-index:-1;
     }
 
     .wrap{ width:min(var(--maxw), 100%); }
@@ -340,6 +351,28 @@
       unicode-bidi: plaintext;
     }
 
+    .desc{
+      position:absolute;
+      inset-inline: 14px;
+      bottom: 12px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: rgba(244,244,246,.95);
+      line-height: 1.45;
+      background: rgba(5,5,8,.86);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      box-shadow: 0 12px 26px rgba(0,0,0,.38);
+      display:none;
+      z-index: 5;
+    }
+
+    .card.paid:hover .desc,
+    .card.paid:focus-visible .desc,
+    .card.paid:focus-within .desc{
+      display:block;
+    }
+
     .right{
       z-index:1;
       display:flex;
@@ -496,12 +529,6 @@
             <div class="sectionHead">
               <h2><span class="dot"></span> القنوات المجانية</h2>
             </div>
-
-            <div class="note">
-              <p class="noteText">روابط القنوات المجانية صالحة لمدة يوم واحد فقط ويتم تحديثها باستمرار.</p>
-              <span class="notePill">تنبيه</span>
-            </div>
-
             <div class="grid" id="arFreeGrid"></div>
           </div>
 
@@ -526,12 +553,6 @@
             <div class="sectionHead">
               <h2><span class="dot"></span> FREE TELEGRAM CHANNELS</h2>
             </div>
-
-            <div class="note">
-              <p class="noteText">Free Telegram links are valid for 1 day only and are updated continuously.</p>
-              <span class="notePill">NOTE</span>
-            </div>
-
             <div class="grid" id="enFreeGrid"></div>
           </div>
 
@@ -579,41 +600,51 @@
     const AMH_BASE_URL = "https://arabmenhub.github.io/AMH/";
 
     const TELEGRAM = {
-      free: [
-        {
-          href: "https://t.me/+CRIx522PeFw1NDUx",
+      free: [        {
+          href: "https://t.me/+X0N5nZWmks1mNmM0",
           logo: "telegram/free_1.png",
-          flags: ["🇰🇼","🇸🇦"],
+          flags: ["🇪🇬","🇸🇦"],
           arName: "قناة مجانية 1",
           enName: "Free Channel 1"
         },
         {
-          href: "https://t.me/+biwL04nm0XszMDA0",
+          href: "https://t.me/+hncIXz4ilfhmMmQx",
           logo: "telegram/free_2.png",
-          flags: ["🇰🇼","🇸🇦"],
+          flags: ["🇪🇬","🇸🇦"],
           arName: "قناة مجانية 2",
           enName: "Free Channel 2"
         }
       ],
       paid: [
         {
+          href: "https://t.me/+KYodnCKKN0swYTlh",
+          logo: "telegram/paid_gulf.png",
+          flags: ["🇪🇬","🇸🇦"],
+          arName: "مميّز",
+          enName: "Exclusive",
+          arDesc: "12 جروب مصري و خليجي مفتوحين الحفظ طول الوقت و الدفع مرة واحدة",
+          enDesc: "12 Groups (Egyptians and Khalijis), Saving enabled all the time with one time payment",
+          prefixAr: "💎",
+          prefixEn: "💎"
+        },
+        {
           href: "https://t.me/+LugMJpBoQ7VkYjk8",
           logo: "telegram/paid_eg.png",
-          flags: ["🇪🇬"],
-          arName: "رابط مدفوع",
-          enName: "Paid (EG)",
+          flags: ["🇸🇦","🇪🇬"],
+          arName: "عربي",
+          enName: "Arab",
           prefixAr: "💎",
           prefixEn: "💎"
         },
         {
           href: "https://t.me/+k3BiI3d-mjJhNjU0",
           logo: "telegram/paid_gulf.png",
-          flags: ["🇦🇪","🇰🇼","🇸🇦","🇱🇧"],
-          arName: "رابط مدفوع",
-          enName: "Paid (Gulf)",
+          flags: ["🇸🇦","🇪🇬"],
+          arName: "خليجي",
+          enName: "Khaliji",
           prefixAr: "💎",
           prefixEn: "💎"
-        }
+        },
       ]
     };
 
@@ -664,19 +695,20 @@
 
     function flagsToText(flags){ return (flags || []).join(" "); }
 
-    function makeCard({href, iconHTML, imgSrc, name, flags, pill}){
+    function makeCard({href, iconHTML, imgSrc, name, desc, flags, pill, isPaid}){
       const icon = imgSrc
         ? `<div class="icon"><img src="${imgSrc}" alt=""></div>`
         : `<div class="icon" aria-hidden="true">${iconHTML || ""}</div>`;
 
       return `
-        <a class="card" href="${href}" target="_blank" rel="noopener noreferrer">
+        <a class="card ${isPaid ? "paid" : ""}" href="${href}" target="_blank" rel="noopener noreferrer" ${desc ? `title="${desc}"` : ""}>
           ${icon}
           <div class="meta">
             <div class="nameRow">
               <div class="name">${name}</div>
               ${flags && flags.length ? `<div class="flags">${flagsToText(flags)}</div>` : ``}
             </div>
+            ${desc ? `<div class="desc">${desc}</div>` : ``}
             <div class="suburl">${href}</div>
           </div>
           <div class="right">
@@ -700,7 +732,8 @@
         const name = (lang === "ar")
           ? `${c.prefixAr || ""} ${c.arName}`.trim()
           : `${c.prefixEn || ""} ${c.enName}`.trim();
-        return makeCard({ href: c.href, imgSrc: c.logo, name, flags: c.flags, pill: "Telegram" });
+        const desc = (lang === "ar") ? c.arDesc : c.enDesc;
+        return makeCard({ href: c.href, imgSrc: c.logo, name, desc, flags: c.flags, pill: "Telegram" });
       }).join("");
     }
 
