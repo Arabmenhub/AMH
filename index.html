@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <title>Arab Men Hub - منصة الرجال العرب</title>
-  <meta name="description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta name="description" content="أفضل منصة روابط ومحتوى عربي مختار" />
 
   <!-- ✅ Share preview -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Arab Men Hub" />
   <meta property="og:title" content="Arab Men Hub - منصة الرجال العرب" />
-  <meta property="og:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta property="og:description" content="أفضل منصة روابط ومحتوى عربي مختار" />
   <meta property="og:url" content="https://arabmenhub.github.io/AMH/" />
   <meta property="og:image" content="https://arabmenhub.github.io/AMH/share.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arab Men Hub - منصة الرجال العرب" />
-  <meta name="twitter:description" content="أفضل منصّة روابط ومحتوى عربي مختار" />
+  <meta name="twitter:description" content="أفضل منصة روابط ومحتوى عربي مختار" />
   <meta name="twitter:image" content="https://arabmenhub.github.io/AMH/share.png" />
 
   <!-- ✅ Favicons (browser tab logo) -->
@@ -496,7 +496,7 @@
 
           <div class="titles" data-lang="ar">
             <h1>Arab Men Hub - منصة الرجال العرب</h1>
-            <p>أفضل منصّة روابط ومحتوى عربي مختار</p>
+            <p>أفضل منصة روابط ومحتوى عربي مختار</p>
           </div>
 
           <div class="titles ltr" data-lang="en">
@@ -578,14 +578,14 @@
         <div class="footerCard" data-lang="ar">
           <span class="footerDot" aria-hidden="true"></span>
           <p class="footerText">
-            ملحوظة: التواصل على رسايل الصفحات المجانية أو صفحة إكس (تويتر سابقًا) لطريقة الدفع بـ إنستا باي.
+            ملحوظة: التواصل على رسائل الصفحات المجانية أو رسالة على القناة لطريقة الدفع بـ إنستا باي.
           </p>
         </div>
 
         <div class="footerCard ltr" data-lang="en">
           <span class="footerDot" aria-hidden="true"></span>
           <p class="footerText">
-            Note: Contact via free pages messages or X (formerly Twitter) for InstaPay payment instructions.
+            Note: Contact via free pages messages or a channel message for InstaPay payment instructions.
           </p>
         </div>
       </div>
@@ -598,51 +598,61 @@
     // EASY TO UPDATE LINKS
     // =========================
     const AMH_BASE_URL = "https://arabmenhub.github.io/AMH/";
-
     const TELEGRAM = {
       free: [
-  {
-    href: "https://t.me/+P_sKeW5BSws5NTg0",
-    logo: "telegram/free_2.png",
-    flags: ["🇪🇬","🇸🇦"],
-    arName: "القناة المجانية",
-    enName: "Free Channel"
-  }
-],
+        {
+          href: "https://t.me/+P_sKeW5BSws5NTg0",
+          logo: "telegram/free_2.png",
+          flags: ["🇪🇬","🇸🇦"],
+          arName: "القناة المجانية",
+          enName: "Free Channel"
+        }
+      ],
 
       paid: [
         {
           href: "https://t.me/+ACU9_szQeiczOTkx",
           logo: "telegram/paid_gulf.png",
           flags: ["🇪🇬","🇸🇦"],
-          arName: "مميّز",
+          arName: "مميز",
           enName: "Exclusive",
-          arDesc: "12 جروب مصري و خليجي مفتوحين الحفظ طول الوقت و الدفع مرة واحدة",
-          enDesc: "12 Groups (Egyptians and Khalijis), Saving enabled all the time with one time payment",
+          arDesc: "12 جروب مصري و خليجي، 200 الف فيديو، الدفع مرة واحدة",
+          enDesc: "12 Groups (Egyptians and Khalijis), 200K videos, one-time payment",
           prefixAr: "💎",
           prefixEn: "💎"
         },
         {
           href: "https://t.me/+LugMJpBoQ7VkYjk8",
           logo: "telegram/paid_eg.png",
-          flags: ["🇸🇦","🇪🇬"],
+          flags: ["🇪🇬","🇸🇦"],
           arName: "عربي",
           enName: "Arab",
+          arDesc: "37 الف فيديو",
+          enDesc: "37K videos",
           prefixAr: "💎",
           prefixEn: "💎"
         },
         {
           href: "https://t.me/+k3BiI3d-mjJhNjU0",
           logo: "telegram/paid_gulf.png",
-          flags: ["🇸🇦","🇪🇬"],
+          flags: ["🇪🇬","🇸🇦"],
           arName: "خليجي",
           enName: "Khaliji",
+          arDesc: "خليجي 10 الاف فيديو",
+          enDesc: "Khaliji 10K videos",
           prefixAr: "💎",
           prefixEn: "💎"
         },
+        {
+          href: "https://t.me/+XceK_9WFuKhiNGYx",
+          logo: "hamoudi.png",
+          arName: "حمودي حصري",
+          enName: "Hamoudi Exclusive",
+          prefixAr: "💎",
+          prefixEn: "💎"
+        }
       ]
     };
-
     const OTHER = [
       {
         href: "https://unlockd.me/egyptian6gay",
@@ -650,13 +660,6 @@
         enName: "Unlockd",
         pill: "Unlockd",
         svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 0 0-8 0h2a2 2 0 0 1 4 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm0 11H7v-7h10v7zm-5-2a2 2 0 1 0-2-2 2 2 0 0 0 2 2z"/></svg>`
-      },
-      {
-        href: "https://x.com/egyptian6gay",
-        arName: "إكس (تويتر سابقًا)",
-        enName: "X",
-        pill: "X",
-        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21.7l-7.53 8.606L23 22h-6.8l-5.316-6.94L4.99 22H1.53l8.05-9.203L1 2h6.97l4.8 6.272L18.244 2zm-1.203 18h1.916L6.11 3.88H4.05L17.04 20z"/></svg>`
       },
       {
         href: "https://bsky.app/profile/egygayvid.bsky.social",
@@ -685,8 +688,16 @@
         enName: "Reddit",
         pill: "Reddit",
         svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854v-2.385c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.332-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293C19.612 22.954 24 17.99 24 12z"/></svg>`
+      },
+      {
+        href: "https://discord.gg/t5kBA2Au",
+        arName: "Discord",
+        enName: "Discord",
+        pill: "Discord",
+        svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.968 13.968 0 0 0-.604 1.249 18.51 18.51 0 0 0-5.487 0 13.968 13.968 0 0 0-.604-1.249.074.074 0 0 0-.079-.037A19.736 19.736 0 0 0 3.7 4.369a.069.069 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.037.074.074 0 0 0 .082-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 0 0-.041-.103 13.247 13.247 0 0 1-1.872-.892.077.077 0 0 1-.008-.127c.126-.095.252-.195.372-.295a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.1.246.2.372.295a.077.077 0 0 1-.006.127 12.262 12.262 0 0 1-1.873.891.077.077 0 0 0-.04.104c.36.699.772 1.364 1.225 1.994a.074.074 0 0 0 .082.027 19.9 19.9 0 0 0 6.002-3.037.082.082 0 0 0 .031-.056c.5-5.178-.838-9.673-3.548-13.661a.061.061 0 0 0-.031-.027zM8.02 15.331c-1.18 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.419-2.157 2.419zm7.975 0c-1.18 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.419-2.157 2.419z"/></svg>`
       }
     ];
+
 
     function flagsToText(flags){ return (flags || []).join(" "); }
 
@@ -751,12 +762,12 @@
         document.documentElement.lang = "ar";
         document.documentElement.dir  = "rtl";
         document.title = "Arab Men Hub - منصة الرجال العرب";
-        document.querySelector('meta[name="description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+        document.querySelector('meta[name="description"]').setAttribute("content", "أفضل منصة روابط ومحتوى عربي مختار");
 
         document.querySelector('meta[property="og:title"]').setAttribute("content", "Arab Men Hub - منصة الرجال العرب");
-        document.querySelector('meta[property="og:description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+        document.querySelector('meta[property="og:description"]').setAttribute("content", "أفضل منصة روابط ومحتوى عربي مختار");
         document.querySelector('meta[name="twitter:title"]').setAttribute("content", "Arab Men Hub - منصة الرجال العرب");
-        document.querySelector('meta[name="twitter:description"]').setAttribute("content", "أفضل منصّة روابط ومحتوى عربي مختار");
+        document.querySelector('meta[name="twitter:description"]').setAttribute("content", "أفضل منصة روابط ومحتوى عربي مختار");
       } else {
         document.documentElement.lang = "en";
         document.documentElement.dir  = "ltr";
